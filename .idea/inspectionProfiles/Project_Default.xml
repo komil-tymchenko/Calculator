@@ -1,0 +1,95 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ESLintInspection" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="1">
+            <item index="0" class="java.lang.String" itemvalue="ng-click" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="57">
+            <item index="0" class="java.lang.String" itemvalue="nobr" />
+            <item index="1" class="java.lang.String" itemvalue="noembed" />
+            <item index="2" class="java.lang.String" itemvalue="comment" />
+            <item index="3" class="java.lang.String" itemvalue="noscript" />
+            <item index="4" class="java.lang.String" itemvalue="embed" />
+            <item index="5" class="java.lang.String" itemvalue="script" />
+            <item index="6" class="java.lang.String" itemvalue="md-tabs" />
+            <item index="7" class="java.lang.String" itemvalue="md-radio-button" />
+            <item index="8" class="java.lang.String" itemvalue="md-checkbox" />
+            <item index="9" class="java.lang.String" itemvalue="md-ink-bar" />
+            <item index="10" class="java.lang.String" itemvalue="mx-actions-dropdown" />
+            <item index="11" class="java.lang.String" itemvalue="mx-shell-sidebar-dialogs-container" />
+            <item index="12" class="java.lang.String" itemvalue="md-icon" />
+            <item index="13" class="java.lang.String" itemvalue="mx-dialog-task-bar" />
+            <item index="14" class="java.lang.String" itemvalue="md-sidenav" />
+            <item index="15" class="java.lang.String" itemvalue="md-toolbar" />
+            <item index="16" class="java.lang.String" itemvalue="mx-dialog-task-bar-item" />
+            <item index="17" class="java.lang.String" itemvalue="md-dialog" />
+            <item index="18" class="java.lang.String" itemvalue="md-dialog-content" />
+            <item index="19" class="java.lang.String" itemvalue="mx-form" />
+            <item index="20" class="java.lang.String" itemvalue="mx-search" />
+            <item index="21" class="java.lang.String" itemvalue="mx-shell-search" />
+            <item index="22" class="java.lang.String" itemvalue="md-content" />
+            <item index="23" class="java.lang.String" itemvalue="mx-shell-toolbar" />
+            <item index="24" class="java.lang.String" itemvalue="mx-toolbar-actions" />
+            <item index="25" class="java.lang.String" itemvalue="mx-shell-breadcrumbs" />
+            <item index="26" class="java.lang.String" itemvalue="mx-shell-nav" />
+            <item index="27" class="java.lang.String" itemvalue="md-menu" />
+            <item index="28" class="java.lang.String" itemvalue="md-menu-bar" />
+            <item index="29" class="java.lang.String" itemvalue="mx-shell-user-menu" />
+            <item index="30" class="java.lang.String" itemvalue="md-menu-item" />
+            <item index="31" class="java.lang.String" itemvalue="md-item" />
+            <item index="32" class="java.lang.String" itemvalue="md-menu-content" />
+            <item index="33" class="java.lang.String" itemvalue="md-tabs-wrapper" />
+            <item index="34" class="java.lang.String" itemvalue="mx-common-actions" />
+            <item index="35" class="java.lang.String" itemvalue="md-input-container" />
+            <item index="36" class="java.lang.String" itemvalue="md-switch" />
+            <item index="37" class="java.lang.String" itemvalue="mx-object-image" />
+            <item index="38" class="java.lang.String" itemvalue="mx-text-box" />
+            <item index="39" class="java.lang.String" itemvalue="mx-button" />
+            <item index="40" class="java.lang.String" itemvalue="md-bottom-sheet" />
+            <item index="41" class="java.lang.String" itemvalue="md-backdrop" />
+            <item index="42" class="java.lang.String" itemvalue="mx-shell-avatar" />
+            <item index="43" class="java.lang.String" itemvalue="md-button" />
+            <item index="44" class="java.lang.String" itemvalue="mx-feedback" />
+            <item index="45" class="java.lang.String" itemvalue="mx-item-chooser" />
+            <item index="46" class="java.lang.String" itemvalue="md-tab-content" />
+            <item index="47" class="java.lang.String" itemvalue="mx-kb-solution" />
+            <item index="48" class="java.lang.String" itemvalue="md-tab-item" />
+            <item index="49" class="java.lang.String" itemvalue="md-dummy-tab" />
+            <item index="50" class="java.lang.String" itemvalue="md-tabs-content-wrapper" />
+            <item index="51" class="java.lang.String" itemvalue="mx-side-panel-actions" />
+            <item index="52" class="java.lang.String" itemvalue="mx-action" />
+            <item index="53" class="java.lang.String" itemvalue="md-list-item" />
+            <item index="54" class="java.lang.String" itemvalue="md-tabs-canvas" />
+            <item index="55" class="java.lang.String" itemvalue="mx-side-panel-tab-body" />
+            <item index="56" class="java.lang.String" itemvalue="mx-side-panel" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
+    <inspection_tool class="IgnoreCoverEntry" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="IgnoreUnusedEntry" enabled="false" level="UNUSED ENTRY" enabled_by_default="false" />
+    <inspection_tool class="JSHint" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="JSValidateJSDoc" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="SassScssResolvedByNameOnly" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="SassScssUnresolvedMixin" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SassScssUnresolvedPlaceholderSelector" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="SassScssUnresolvedVariable" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UnnecessaryLocalVariableJS" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="m_ignoreImmediatelyReturnedVariables" value="false" />
+      <option name="m_ignoreAnnotatedVariables" value="false" />
+    </inspection_tool>
+    <inspection_tool class="XmlUnboundNsPrefix" enabled="false" level="WARNING" enabled_by_default="false" />
+  </profile>
+</component>
