@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <title>Калькулятор</title>
+    <style>
+        .calculator {
+            padding: 5px;
+            float: left;
+            width: 2000px;
+        }
+
+        .tests {
+            padding: 5px;
+            width: 100px;
+            height: 1000px;
+            float: left;
+        }
+
+        .sign {
+            padding: 2px;
+            width: 1px;
+            float: left;
+        }
+
+        .result {
+            padding: 5px;
+            width: 200px;
+            float: left;
+        }
+
+        .calculatorAndResult {
+            padding: 1px;
+            width: 200px;
+            height: 1000px;
+            float: left;
+        }
+
+        .button {
+            font-size: 16px;
+            width: 30px;
+            margin: 3px 1px;
+        }
+
+        .buttonClean {
+            width: 105px;
+            margin: 5px 0px;
+        }
+
+        .buttonOperations {
+            margin: 0px 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class='calculatorAndResult'>
+    <p><b>Калькулятор</b></p>
+    <div class='result'>
+        <p style='color:blue' id='result'></p>
+    </div>
+
+    <div class='calculator'>
+        <div>
+            <button class="button" id='buttonOne' onclick='one()'>1</button>
+            <button class="button" id='buttonTwo' onclick='two()'>2</button>
+            <button class="button" id='buttonThree' onclick='three()'>3</button>
+            <button class="button buttonOperations" id='plus' onclick='plus()'>+</button>
+        </div>
+        <div>
+            <button class="button" id='buttonFour' onclick='four()'>4</button>
+            <button class="button" id='buttonFive' onclick='five()'>5</button>
+            <button class="button" id='buttonSix' onclick='six()'>6</button>
+            <button class="button buttonOperations" id='minus' onclick='minus()'>-</button>
+        </div>
+        <button class="button" id='buttonSeven' onclick='seven()'>7</button>
+        <button class="button" id='buttonEight' onclick='eight()'>8</button>
+        <button class="button" id='buttonNine' onclick='nine()'>9</button>
+        <button class="button buttonOperations" id='multiple' onclick='multiple()'>*</button>
+        <div>
+            <button class="button" id='buttonZero' onclick='zero()'>0</button>
+            <button class="button" id='buttonDot' onclick='dot()'>.</button>
+            <button class="button" id='calculate' onclick='calculate()'>=</button>
+            <button class="button buttonOperations" id='divide' onclick='divide()'>/</button>
+        </div>
+        <div>
+            <button class="button buttonClean" id='buttonClean' onclick='clean()'>Очистить</button>
+        </div>
+    </div>
+</div>
+<div id='testsdiv' class='tests'>
+</div>
+
+
+<script>
+	let result = 0;
+	let part = '';
+	let currentOperation;
+	let operationBlocker = 0;
+	let testSuccessCount = 0;
+	let testFailCount = 0;
+	document.write('<br>' + '<b>' + ' Результаты тестов' + '<br>' + '</b>' + '<br>');
+
+	document.getElementById('result').innerHTML = 0;
+
+	function one() {
+		if (operationBlocker === 0) {
+			part = part + 1;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function two() {
+		if (operationBlocker === 0) {
+			part = part + 2;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function three() {
+		if (operationBlocker === 0) {
+			part = part + 3;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function four() {
+		if (operationBlocker === 0) {
+			part = part + 4;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function five() {
+		if (operationBlocker === 0) {
+			part = part + 5;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function six() {
+		if (operationBlocker === 0) {
+			part = part + 6;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function seven() {
+		if (operationBlocker === 0) {
+			part = part + 7;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function eight() {
+		if (operationBlocker === 0) {
+			part = part + 8;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function nine() {
+		if (operationBlocker === 0) {
+			part = part + 9;
+			document.getElementById('result').innerHTML = part;
+			zeroChecker();
+		}
+	}
+
+	function zero() {
+		if (part !== '0' && operationBlocker === 0) {
+			part = part + 0;
+			document.getElementById('result').innerHTML = part
+		}
+	}
+
+	function dot() {
+		if (part !== '')
+			if (resultDotChecker() < 1)
+				if (operationBlocker === 0) {
+					part = part + '.';
+					document.getElementById('result').innerHTML = part
+				}
+	}
+
+	function resultDotChecker() {
+		let resultDotCheckerResult = 0;
+		let array = document.getElementById('result').innerHTML.toString().split('');
+		for (let i = 0; i < array.length; i++) {
+			if (array[i] === '.')
+				resultDotCheckerResult++;
+		}
+		return resultDotCheckerResult;
+	}
+
+	function plus() {
+		calculate();
+		currentOperation = 'plus';
+		if (part !== '') {
+			result = (result + parseFloat(part, 10));
+		}
+		part = '';
+	}
+
+	function minus() {
+		calculate();
+		if (part !== '' && currentOperation === undefined) {
+			result = parseFloat(part, 10)
+		}
+		if (part !== '' && currentOperation !== undefined) {
+			result = result - parseFloat(part, 10)
+		}
+		part = '';
+		currentOperation = 'minus';
+	}
+
+	function multiple() {
+		calculate();
+		currentOperation = 'multiple';
+		if (part !== '') {
+			result = result + parseFloat(part, 10)
+		}
+		part = '';
+	}
+
+	function divide() {
+		calculate();
+		currentOperation = 'divide';
+		if (part !== '') {
+			result = result + parseFloat(part, 10)
+		}
+		part = '';
+	}
+
+	function calculate() {
+		if (part !== '' && currentOperation !== undefined) {
+			switch (currentOperation) {
+				case 'plus':
+					if (operationBlocker === 0)
+						result = result + parseFloat(part, 10);
+					part = '';
+					break;
+
+				case 'minus':
+					if (operationBlocker === 0)
+						result = result - parseFloat(part, 10);
+					part = '';
+					break;
+
+				case 'multiple':
+					if (operationBlocker === 0)
+						result = result * parseFloat(part, 10);
+					part = '';
+					break;
+
+				case 'divide':
+					if (part != 0 && operationBlocker === 0) {
+						result = result / parseFloat(part, 10);
+						part = '';
+						break;
+					} else {
+						result = 'Нельзя делить на ноль';
+						part = '';
+						operationBlocker = '1';
+						break;
+					}
+			}
+			document.getElementById('result').innerHTML = result
+		}
+	}
+
+	function clean() {
+
+		result = 0;
+		part = '';
+		operationBlocker = 0;
+		currentOperation = undefined;
+		document.getElementById('result').innerHTML = result;
+	}
+
+	function zeroChecker() {
+		let array = [];
+		array = (document.getElementById('result').innerText).split((''));
+
+		if (array.length === 2 && array[0] === "0") {
+			document.getElementById('result').innerHTML = array[1].toString();
+			part = array[1].toString();
+		}
+	}
+
+
+	/////////////////////  CORE  /////////////////////////
+	function buttonClick(buttonElementID) {
+		document.getElementById(buttonElementID).click()
+	}
+
+	function getValue(elementID) {
+		return document.getElementById(elementID).innerText;
+	}
+
+	function toEqual(el1, el2, description) {
+		if (el1 == el2) {
+			document.writeln(('SUCCESS ' + description + '<br>').fontcolor('green'));
+			testSuccessCount++
+		} else {
+			document.writeln(('FAIL ' + description + '<br>').fontcolor('red'));
+			testFailCount++
+		}
+	}
+
+	//////////////////////  TESTS  ///////////////////////
+	(() => {
+		(() => {
+			result = getValue('result');
+			toEqual(result, 0, 'Начальный ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonTwo');
+			result = getValue('result');
+			toEqual(result, 12, 'Склейка цифр во время ввода');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('plus');
+			buttonClick('buttonTwo');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 3, 'Суммирование');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('buttonZero');
+			result = getValue('result');
+			toEqual(result.toString(), '0', 'Отсутствия двойного нуля');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonTwo');
+			buttonClick('buttonThree');
+			buttonClick('buttonFour');
+			buttonClick('buttonFive');
+			buttonClick('buttonSix');
+			buttonClick('buttonSeven');
+			buttonClick('buttonEight');
+			buttonClick('buttonNine');
+			buttonClick('buttonZero');
+			result = getValue('result');
+			toEqual(result, 1234567890, 'Вывод всех цифр');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonTwo');
+			buttonClick('plus');
+			buttonClick('buttonThree');
+			buttonClick('buttonFour');
+			buttonClick('plus');
+			buttonClick('buttonFive');
+			buttonClick('buttonSix');
+			buttonClick('minus');
+			buttonClick('buttonSeven');
+			buttonClick('buttonEight');
+
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 24, 'Комплексные действия');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('plus');
+			buttonClick('buttonFour');
+			buttonClick('plus');
+
+			result = getValue('result');
+			toEqual(result, 5, 'Промежуточный результат');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('minus');
+			buttonClick('buttonSix');
+			buttonClick('calculate');
+
+			result = getValue('result');
+			toEqual(result, -1, 'Отрицательный результат');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('minus');
+			buttonClick('buttonSix');
+			buttonClick('plus');
+
+			result = getValue('result');
+			toEqual(result, -1, 'Отрицательный результат, полученный кнопкой Плюс');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('minus');
+			buttonClick('buttonSix');
+			buttonClick('minus');
+
+			result = getValue('result');
+			toEqual(result, -1, 'Отрицательный результат, полученный кнопкой Минус');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('buttonNine');
+
+			result = getValue('result');
+			toEqual(result.toString(), '9', 'Невозможность целых чисел, начинающихся на ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('calculate');
+
+			result = getValue('result');
+			toEqual(result, 5, 'Холостое нажатие на знак Равно');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('calculate');
+			buttonClick('buttonFive');
+			buttonClick('calculate');
+			buttonClick('buttonSix');
+
+			result = getValue('result');
+			toEqual(result, 56, 'Лишнее нажатие на знак Равно не прерывает ввод');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('calculate');
+			buttonClick('buttonFive');
+			buttonClick('calculate');
+			buttonClick('buttonSix');
+			buttonClick('calculate');
+			buttonClick('plus');
+			buttonClick('buttonOne');
+			buttonClick('calculate');
+
+			result = getValue('result');
+			toEqual(result, 57, 'Лишнее нажатие на знак Равно не влияет на счет');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonThree');
+			buttonClick('plus');
+			buttonClick('minus');
+			buttonClick('buttonOne');
+			buttonClick('calculate');
+
+			result = getValue('result');
+			toEqual(result, 2, 'Правильный счет при нажатии Плюс, затем Минус');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonThree');
+			buttonClick('minus');
+			buttonClick('plus');
+			buttonClick('buttonOne');
+			buttonClick('calculate');
+
+			result = getValue('result');
+			toEqual(result, 4, 'Правильный счет при нажатии Минус, затем Плюс');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('minus');
+			buttonClick('buttonThree');
+			buttonClick('plus');
+			buttonClick('buttonOne');
+			buttonClick('calculate');
+
+			result = getValue('result');
+			toEqual(result, -2, 'Начало счета с отрицательного числа');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('minus');
+			buttonClick('buttonThree');
+			result = getValue('result');
+			toEqual(result, '3', 'Начало с отрицательного знака, при наличии цифры');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('minus');
+			buttonClick('buttonThree');
+			buttonClick('buttonClean');
+			toEqual(result, '', 'Кнопка Очистить удаляет знак');
+			result = getValue('result');
+			toEqual(result, 0, 'Кнопка Очистить удаляет результат');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('multiple');
+			buttonClick('buttonThree');
+			buttonClick('calculate');
+			toEqual(result, 15, 'Умножение');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('multiple');
+			buttonClick('buttonFive');
+			buttonClick('multiple');
+			toEqual(result, 25, 'Промежуточный результат при умножении');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('multiple');
+			toEqual(result, 5, 'Результат не меняется при первом выборе операции');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('multiple');
+			buttonClick('buttonZero');
+			buttonClick('calculate');
+			toEqual(result, 0, 'Умножение на ноль');
+			buttonClick('buttonClean');
+		})();
+
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('multiple');
+			buttonClick('buttonFive');
+			buttonClick('calculate');
+			toEqual(result, 0, 'Ноль умножается на число');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('multiple');
+			buttonClick('buttonFive');
+			buttonClick('minus');
+			toEqual(result, 0, 'Промежуточный результат после умножения на ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('buttonFive');
+			buttonClick('buttonZero');
+			result = getValue('result');
+			toEqual(result, 50, 'Ввод двухзначного числа, если вначале был ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('buttonFive');
+			buttonClick('buttonZero');
+			buttonClick('plus');
+			buttonClick('buttonOne');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 51, 'Суммирование двухзначного числа, если вначале был ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFive');
+			buttonClick('divide');
+			buttonClick('buttonZero');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 'Нельзя делить на ноль', 'Нельзя делить на ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('divide');
+			buttonClick('buttonZero');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 'Нельзя делить на ноль', 'Нельзя делить ноль на ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('divide');
+			buttonClick('buttonThree');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 0, 'Можно делить ноль');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonSix');
+			buttonClick('divide');
+			buttonClick('buttonTwo');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 3, 'Целочисленное деление');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonZero');
+			buttonClick('divide');
+			buttonClick('buttonFour');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 2.5, 'Деление с коротким остатком');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('divide');
+			buttonClick('buttonTwo');
+			buttonClick('buttonZero');
+			buttonClick('buttonZero');
+			buttonClick('buttonZero');
+			buttonClick('buttonZero');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 0.00005, 'Деление с длинным остатком');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonNine');
+			buttonClick('divide');
+			buttonClick('buttonZero');
+			buttonClick('calculate');
+			buttonClick('buttonOne');
+			buttonClick('buttonTwo');
+			buttonClick('buttonThree');
+			buttonClick('buttonFour');
+			buttonClick('buttonFive');
+			buttonClick('buttonSix');
+			buttonClick('buttonSeven');
+			buttonClick('buttonEight');
+			buttonClick('buttonNine');
+			buttonClick('buttonZero');
+			result = getValue('result');
+			toEqual(result, 'Нельзя делить на ноль', 'Деление на ноль блокирует клавиатуру');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFour');
+			buttonClick('divide');
+			buttonClick('buttonZero');
+			buttonClick('calculate');
+			buttonClick('buttonClean');
+			buttonClick('buttonOne');
+			result = getValue('result');
+			toEqual(result, 1, 'Кнопка Очистить разблокирует заблокированную клавиатуру');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFour');
+			buttonClick('buttonClean');
+			buttonClick('plus');
+			buttonClick('buttonOne');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 1, 'Кнопка Очистить прерывает текущую операцию');
+			buttonClick('buttonClean');
+		})();
+
+
+		(() => {
+			buttonClick('buttonDot');
+			result = getValue('result');
+			toEqual(result, 0, 'Результат не может начинаться с точки');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonZero');
+			buttonClick('buttonDot');
+			buttonClick('buttonDot');
+			result = getValue('result');
+			toEqual(result, '0.', 'Может быть только одна точка');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonDot');
+			buttonClick('buttonTwo');
+			buttonClick('plus');
+			buttonClick('buttonThree');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 4.2, 'Суммирование нецелого и целого числа');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonDot');
+			buttonClick('buttonOne');
+			buttonClick('buttonDot');
+			buttonClick('buttonDot');
+			buttonClick('buttonTwo');
+			buttonClick('plus');
+			buttonClick('buttonDot');
+			buttonClick('buttonThree');
+			buttonClick('buttonDot');
+			buttonClick('buttonThree');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 4.5, 'Отсекание лишних точек');
+			buttonClick('buttonClean');
+		})();
+
+		document.write('<b>' + '---------------------------------------------------------------------------------------------' + '<br>' + '</b>');
+		document.write('<b>' + 'Успешных тестов: ' + testSuccessCount + '<br>' + '</b>');
+		document.write('<b>' + 'Упавших тестов: ' + testFailCount + '<br>' + '</b>');
+	})()
+
+</script>
+</body>
+</html>
