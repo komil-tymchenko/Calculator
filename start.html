@@ -244,29 +244,20 @@
 	}
 
 	function square() {
-		if (operationBlocker === 0) {
-		calculate();
-		currentOperation = undefined;
-		result = document.getElementById('result').innerHTML = (document.getElementById('result').innerHTML)*(document.getElementById('result').innerHTML);
-		part = '';
+		{
+			calculate();
+            currentOperation = 'square';
+            part = result;
+            calculate();
 		}
 	}
 
 	function root() {
 		calculate();
-		if (document.getElementById('result').innerHTML >=0 && operationBlocker === 0)
-            {
-                currentOperation = undefined;
-                result = document.getElementById('result').innerHTML = Math.sqrt(document.getElementById('result').innerHTML);
-                part = '';
-            }
-		else
-			{
-                result = 'Нельзя брать корень из отрицательного числа';
-                part = '';
-                operationBlocker = '1';
-                document.getElementById('result').innerHTML = result
-		    }
+		currentOperation = 'root';
+		part = result;
+		calculate();
+
 	}
 
 	function calculate() {
@@ -276,17 +267,17 @@
                 {
 			switch (currentOperation) {
 				case 'plus':
-						result = result + parseFloat(part, 10);
+					result = result + parseFloat(part, 10);
 					part = '';
 					break;
 
 				case 'minus':
-						result = result - parseFloat(part, 10);
+					result = result - parseFloat(part, 10);
 					part = '';
 					break;
 
 				case 'multiple':
-						result = result * parseFloat(part, 10);
+					result = result * parseFloat(part, 10);
 					part = '';
 					break;
 
@@ -301,13 +292,27 @@
 						operationBlocker = '1';
 						break;
 					}
+
+				case 'square':
+					result = document.getElementById('result').innerHTML * document.getElementById('result').innerHTML;
+					part = '';
+					break;
+
+				case 'root':
+					if (document.getElementById('result').innerHTML >= 0) {
+						result = document.getElementById('result').innerHTML = Math.sqrt(document.getElementById('result').innerHTML);
+						part = '';
+					} else {
+						result = 'Нельзя брать корень из отрицательного числа';
+						part = '';
+						operationBlocker = '1';
+					}
 			}
 			document.getElementById('result').innerHTML = result
 		}
 	}
 
 	function clean() {
-
 		result = 0;
 		part = '';
 		operationBlocker = 0;
