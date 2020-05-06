@@ -13,7 +13,7 @@
         .tests {
             padding: 5px;
             width: 100px;
-            height: 1000px;
+            height: 10000px;
             float: left;
         }
 
@@ -26,7 +26,7 @@
         .calculatorAndResult {
             padding: 1px;
             width: 200px;
-            height: 1000px;
+            height: 10000px;
             float: left;
         }
 
@@ -65,14 +65,16 @@
             <button class="button" id='buttonThree' onclick='three()'>3</button>
 
             <button class="button buttonOperationsFirstLine" id='plus' onclick='plus()'>+</button>
-            <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>^</button>
+            <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>&sup2</button>
 
         </div>
         <div>
             <button class="button" id='buttonFour' onclick='four()'>4</button>
             <button class="button" id='buttonFive' onclick='five()'>5</button>
             <button class="button" id='buttonSix' onclick='six()'>6</button>
+
             <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>-</button>
+            <button class="button buttonOperationsSecondLine" id='root' onclick='root()'>&#8730</button>
         </div>
         <button class="button" id='buttonSeven' onclick='seven()'>7</button>
         <button class="button" id='buttonEight' onclick='eight()'>8</button>
@@ -242,11 +244,29 @@
 	}
 
 	function square() {
+		if (operationBlocker === 0) {
 		calculate();
 		currentOperation = undefined;
 		result = document.getElementById('result').innerHTML = (document.getElementById('result').innerHTML)*(document.getElementById('result').innerHTML);
-		calculate();
 		part = '';
+		}
+	}
+
+	function root() {
+		calculate();
+		if (document.getElementById('result').innerHTML >=0 && operationBlocker === 0)
+            {
+                currentOperation = undefined;
+                result = document.getElementById('result').innerHTML = Math.sqrt(document.getElementById('result').innerHTML);
+                part = '';
+            }
+		else
+			{
+                result = 'Нельзя брать корень из отрицательного числа';
+                part = '';
+                operationBlocker = '1';
+                document.getElementById('result').innerHTML = result
+		    }
 	}
 
 	function calculate() {
@@ -813,6 +833,101 @@
 			buttonClick('square');
 			result = getValue('result');
 			toEqual(result, 400, 'Квадрат посреди сложной операции');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonTwo');
+			buttonClick('buttonDot');
+			buttonClick('buttonOne');
+			buttonClick('square');
+			result = getValue('result');
+			toEqual(result, 4.41, 'Квадрат числа с точкой');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonFour');
+			buttonClick('buttonFour');
+			buttonClick('root');
+			result = getValue('result');
+			toEqual(result, 12, 'Корень числа');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonNine');
+			buttonClick('root');
+			buttonClick('plus');
+			buttonClick('buttonTwo');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 5, 'Корень и другая операция');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonEight');
+			buttonClick('buttonOne');
+			buttonClick('root');
+			buttonClick('root');
+			result = getValue('result');
+			toEqual(result, 3, 'Двойной корень');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonSix');
+			buttonClick('buttonTwo');
+			buttonClick('buttonFive');
+			buttonClick('root');
+			buttonClick('minus');
+			buttonClick('buttonNine');
+			buttonClick('calculate');
+			buttonClick('root');
+			result = getValue('result');
+			toEqual(result, 4, 'Корень из результата сложной операции');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFour');
+			buttonClick('root');
+			buttonClick('plus');
+			buttonClick('buttonSeven');
+			buttonClick('root');
+			result = getValue('result');
+			toEqual(result, 3, 'Корень посреди сложной операции');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonSix');
+			buttonClick('buttonDot');
+			buttonClick('buttonTwo');
+			buttonClick('buttonFive');
+			buttonClick('root');
+			result = getValue('result');
+			toEqual(result, 2.5, 'Корень числа с точкой');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonSix');
+			buttonClick('square');
+			buttonClick('root');
+			result = getValue('result');
+			toEqual(result, 6, 'Квадрат и корень');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('minus');
+			buttonClick('buttonSix');
+			buttonClick('root');
+			result = getValue('result');
+			toEqual(result, 'Нельзя брать корень из отрицательного числа', 'Невозможность корня из отрицательного числа');
 			buttonClick('buttonClean');
 		})();
 
