@@ -270,28 +270,28 @@
 	}
 
 	function calculate() {
-		if (part !== '' && currentOperation !== undefined) {
+		if (operationBlocker === 0)
+			if (part !== '')
+                if (currentOperation !== undefined)
+                {
 			switch (currentOperation) {
 				case 'plus':
-					if (operationBlocker === 0)
 						result = result + parseFloat(part, 10);
 					part = '';
 					break;
 
 				case 'minus':
-					if (operationBlocker === 0)
 						result = result - parseFloat(part, 10);
 					part = '';
 					break;
 
 				case 'multiple':
-					if (operationBlocker === 0)
 						result = result * parseFloat(part, 10);
 					part = '';
 					break;
 
 				case 'divide':
-					if (part != 0 && operationBlocker === 0) {
+					if (part != 0) {
 						result = result / parseFloat(part, 10);
 						part = '';
 						break;
@@ -337,7 +337,7 @@
 
 	function toEqual(el1, el2, description) {
 		if (el1 == el2) {
-			document.writeln(('SUCCESS ' + description + '<br>').fontcolor('green'));
+		//	document.writeln(('SUCCESS ' + description + '<br>').fontcolor('green'));
 			testSuccessCount++
 		} else {
 			document.writeln(('FAIL ' + description + '<br>').fontcolor('red'));
