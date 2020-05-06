@@ -41,8 +41,12 @@
             margin: 5px 0px;
         }
 
-        .buttonOperations {
+        .buttonOperationsFirstLine {
             margin: 0px 10px;
+        }
+
+        .buttonOperationsSecondLine {
+            margin: 0px -7.5px;
         }
     </style>
 </head>
@@ -59,23 +63,26 @@
             <button class="button" id='buttonOne' onclick='one()'>1</button>
             <button class="button" id='buttonTwo' onclick='two()'>2</button>
             <button class="button" id='buttonThree' onclick='three()'>3</button>
-            <button class="button buttonOperations" id='plus' onclick='plus()'>+</button>
+
+            <button class="button buttonOperationsFirstLine" id='plus' onclick='plus()'>+</button>
+            <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>^</button>
+
         </div>
         <div>
             <button class="button" id='buttonFour' onclick='four()'>4</button>
             <button class="button" id='buttonFive' onclick='five()'>5</button>
             <button class="button" id='buttonSix' onclick='six()'>6</button>
-            <button class="button buttonOperations" id='minus' onclick='minus()'>-</button>
+            <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>-</button>
         </div>
         <button class="button" id='buttonSeven' onclick='seven()'>7</button>
         <button class="button" id='buttonEight' onclick='eight()'>8</button>
         <button class="button" id='buttonNine' onclick='nine()'>9</button>
-        <button class="button buttonOperations" id='multiple' onclick='multiple()'>*</button>
+        <button class="button buttonOperationsFirstLine" id='multiple' onclick='multiple()'>*</button>
         <div>
             <button class="button" id='buttonZero' onclick='zero()'>0</button>
             <button class="button" id='buttonDot' onclick='dot()'>.</button>
             <button class="button" id='calculate' onclick='calculate()'>=</button>
-            <button class="button buttonOperations" id='divide' onclick='divide()'>/</button>
+            <button class="button buttonOperationsFirstLine" id='divide' onclick='divide()'>/</button>
         </div>
         <div>
             <button class="button buttonClean" id='buttonClean' onclick='clean()'>Очистить</button>
@@ -231,6 +238,14 @@
 		if (part !== '') {
 			result = result + parseFloat(part, 10)
 		}
+		part = '';
+	}
+
+	function square() {
+		calculate();
+		currentOperation = undefined;
+		result = document.getElementById('result').innerHTML = (document.getElementById('result').innerHTML)*(document.getElementById('result').innerHTML);
+		calculate();
 		part = '';
 	}
 
@@ -746,6 +761,58 @@
 			buttonClick('calculate');
 			result = getValue('result');
 			toEqual(result, 4.5, 'Отсекание лишних точек');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonTwo');
+			buttonClick('square');
+			result = getValue('result');
+			toEqual(result, 144, 'Квадрат числа');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonThree');
+			buttonClick('square');
+			buttonClick('plus');
+			buttonClick('buttonTwo');
+			buttonClick('calculate');
+			result = getValue('result');
+			toEqual(result, 11, 'Квадрат и другая операция');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonTwo');
+			buttonClick('square');
+			buttonClick('square');
+			result = getValue('result');
+			toEqual(result, 16, 'Двойной квадрат');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFour');
+			buttonClick('square');
+			buttonClick('minus');
+			buttonClick('buttonNine');
+			buttonClick('calculate');
+			buttonClick('square');
+			result = getValue('result');
+			toEqual(result, 49, 'Квадрат из результата сложной операции');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('buttonFour');
+			buttonClick('square');
+			buttonClick('plus');
+			buttonClick('buttonFour');
+			buttonClick('square');
+			result = getValue('result');
+			toEqual(result, 400, 'Квадрат посреди сложной операции');
 			buttonClick('buttonClean');
 		})();
 
