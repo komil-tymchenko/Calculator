@@ -76,14 +76,17 @@
             <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>&ndash;</button>
             <button class="button buttonOperationsSecondLine" id='root' onclick='root()'>&#8730;</button>
         </div>
-        <button class="button" id='buttonSeven' onclick='seven()'>7</button>
-        <button class="button" id='buttonEight' onclick='eight()'>8</button>
-        <button class="button" id='buttonNine' onclick='nine()'>9</button>
-        <button class="button buttonOperationsFirstLine" id='multiple' onclick='multiple()'>&#215</button>
+            <button class="button" id='buttonSeven' onclick='seven()'>7</button>
+            <button class="button" id='buttonEight' onclick='eight()'>8</button>
+            <button class="button" id='buttonNine' onclick='nine()'>9</button>
+
+            <button class="button buttonOperationsFirstLine" id='multiple' onclick='multiple()'>&#215</button>
+            <button class="button buttonOperationsSecondLine" id='percent' onclick='percent()'>%</button>
         <div>
             <button class="button" id='buttonZero' onclick='zero()'>0</button>
             <button class="button" id='buttonDot' onclick='dot()'>.</button>
             <button class="button" id='calculate' onclick='calculate()'>=</button>
+
             <button class="button buttonOperationsFirstLine" id='divide' onclick='divide()'>/</button>
         </div>
         <div>
@@ -259,6 +262,24 @@
 		calculate();
 	}
 
+	function percent() {
+		if (operationBlocker === 0) {
+			switch (currentOperation) {
+				case 'plus':
+                case 'minus':
+					part = (result / 100) * part;
+					document.getElementById('result').innerHTML = part;
+					break;
+
+				case 'multiple':
+				case 'divide':
+					part = (part / 100);
+					document.getElementById('result').innerHTML = part;
+					break;
+			}
+		}
+	}
+
 	function calculate() {
 		if (operationBlocker === 0)
 			if (part !== '')
@@ -352,16 +373,16 @@
 	//////////////////////  TESTS  ///////////////////////
 	(() => {
 		(() => {
-			result = getValue('result');
-			toEqual(result, 0, 'Начальный ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 0, 'Начальный ноль');
 			buttonClick('buttonClean');
 		})();
 
 		(() => {
 			buttonClick('buttonOne');
 			buttonClick('buttonTwo');
-			result = getValue('result');
-			toEqual(result, 12, 'Склейка цифр во время ввода');
+			testResult = getValue('result');
+			toEqual(testResult, 12, 'Склейка цифр во время ввода');
 			buttonClick('buttonClean');
 		})();
 
@@ -370,15 +391,15 @@
 			buttonClick('plus');
 			buttonClick('buttonTwo');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 3, 'Суммирование');
+			testResult = getValue('result');
+			toEqual(testResult, 3, 'Суммирование');
 			buttonClick('buttonClean');
 		})();
 
 		(() => {
 			buttonClick('buttonZero');
 			buttonClick('buttonZero');
-			result = getValue('result');
+			testResult = getValue('result');
 			toEqual(result.toString(), '0', 'Отсутствия двойного нуля');
 			buttonClick('buttonClean');
 		})();
@@ -394,8 +415,8 @@
 			buttonClick('buttonEight');
 			buttonClick('buttonNine');
 			buttonClick('buttonZero');
-			result = getValue('result');
-			toEqual(result, 1234567890, 'Вывод всех цифр');
+			testResult = getValue('result');
+			toEqual(testResult, 1234567890, 'Вывод всех цифр');
 			buttonClick('buttonClean');
 		})();
 
@@ -413,8 +434,8 @@
 			buttonClick('buttonEight');
 
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 24, 'Комплексные действия');
+			testResult = getValue('result');
+			toEqual(testResult, 24, 'Комплексные действия');
 			buttonClick('buttonClean');
 		})();
 
@@ -424,8 +445,8 @@
 			buttonClick('buttonFour');
 			buttonClick('plus');
 
-			result = getValue('result');
-			toEqual(result, 5, 'Промежуточный результат');
+			testResult = getValue('result');
+			toEqual(testResult, 5, 'Промежуточный результат');
 			buttonClick('buttonClean');
 		})();
 
@@ -435,8 +456,8 @@
 			buttonClick('buttonSix');
 			buttonClick('calculate');
 
-			result = getValue('result');
-			toEqual(result, -1, 'Отрицательный результат');
+			testResult = getValue('result');
+			toEqual(testResult, -1, 'Отрицательный результат');
 			buttonClick('buttonClean');
 		})();
 
@@ -446,8 +467,8 @@
 			buttonClick('buttonSix');
 			buttonClick('plus');
 
-			result = getValue('result');
-			toEqual(result, -1, 'Отрицательный результат, полученный кнопкой Плюс');
+			testResult = getValue('result');
+			toEqual(testResult, -1, 'Отрицательный результат, полученный кнопкой Плюс');
 			buttonClick('buttonClean');
 		})();
 
@@ -457,8 +478,8 @@
 			buttonClick('buttonSix');
 			buttonClick('minus');
 
-			result = getValue('result');
-			toEqual(result, -1, 'Отрицательный результат, полученный кнопкой Минус');
+			testResult = getValue('result');
+			toEqual(testResult, -1, 'Отрицательный результат, полученный кнопкой Минус');
 			buttonClick('buttonClean');
 		})();
 
@@ -466,8 +487,8 @@
 			buttonClick('buttonZero');
 			buttonClick('buttonNine');
 
-			result = getValue('result');
-			toEqual(result.toString(), '9', 'Невозможность целых чисел, начинающихся на ноль');
+			testResult = getValue('result');
+			toEqual(testResult.toString(), '9', 'Невозможность целых чисел, начинающихся на ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -475,19 +496,8 @@
 			buttonClick('buttonFive');
 			buttonClick('calculate');
 
-			result = getValue('result');
-			toEqual(result, 5, 'Холостое нажатие на знак Равно');
-			buttonClick('buttonClean');
-		})();
-
-		(() => {
-			buttonClick('calculate');
-			buttonClick('buttonFive');
-			buttonClick('calculate');
-			buttonClick('buttonSix');
-
-			result = getValue('result');
-			toEqual(result, 56, 'Лишнее нажатие на знак Равно не прерывает ввод');
+			testResult = getValue('result');
+			toEqual(testResult, 5, 'Холостое нажатие на знак Равно');
 			buttonClick('buttonClean');
 		})();
 
@@ -496,13 +506,24 @@
 			buttonClick('buttonFive');
 			buttonClick('calculate');
 			buttonClick('buttonSix');
+
+			testResult = getValue('result');
+			toEqual(testResult, 56, 'Лишнее нажатие на знак Равно не прерывает ввод');
+			buttonClick('buttonClean');
+		})();
+
+		(() => {
+			buttonClick('calculate');
+			buttonClick('buttonFive');
+			buttonClick('calculate');
+			buttonClick('buttonSix');
 			buttonClick('calculate');
 			buttonClick('plus');
 			buttonClick('buttonOne');
 			buttonClick('calculate');
 
-			result = getValue('result');
-			toEqual(result, 57, 'Лишнее нажатие на знак Равно не влияет на счет');
+			testResult = getValue('result');
+			toEqual(testResult, 57, 'Лишнее нажатие на знак Равно не влияет на счет');
 			buttonClick('buttonClean');
 		})();
 
@@ -513,8 +534,8 @@
 			buttonClick('buttonOne');
 			buttonClick('calculate');
 
-			result = getValue('result');
-			toEqual(result, 2, 'Правильный счет при нажатии Плюс, затем Минус');
+			testResult = getValue('result');
+			toEqual(testResult, 2, 'Правильный счет при нажатии Плюс, затем Минус');
 			buttonClick('buttonClean');
 		})();
 
@@ -525,8 +546,8 @@
 			buttonClick('buttonOne');
 			buttonClick('calculate');
 
-			result = getValue('result');
-			toEqual(result, 4, 'Правильный счет при нажатии Минус, затем Плюс');
+			testResult = getValue('result');
+			toEqual(testResult, 4, 'Правильный счет при нажатии Минус, затем Плюс');
 			buttonClick('buttonClean');
 		})();
 
@@ -537,16 +558,16 @@
 			buttonClick('buttonOne');
 			buttonClick('calculate');
 
-			result = getValue('result');
-			toEqual(result, -2, 'Начало счета с отрицательного числа');
+			testResult = getValue('result');
+			toEqual(testResult, -2, 'Начало счета с отрицательного числа');
 			buttonClick('buttonClean');
 		})();
 
 		(() => {
 			buttonClick('minus');
 			buttonClick('buttonThree');
-			result = getValue('result');
-			toEqual(result, '3', 'Начало с отрицательного знака, при наличии цифры');
+			testResult = getValue('result');
+			toEqual(testResult, '3', 'Начало с отрицательного знака, при наличии цифры');
 			buttonClick('buttonClean');
 		})();
 
@@ -554,9 +575,8 @@
 			buttonClick('minus');
 			buttonClick('buttonThree');
 			buttonClick('buttonClean');
-			toEqual(result, '', 'Кнопка Очистить удаляет знак');
-			result = getValue('result');
-			toEqual(result, 0, 'Кнопка Очистить удаляет результат');
+			testResult = getValue('result');
+			toEqual(testResult, 0, 'Кнопка Очистить удаляет знак и результат');
 			buttonClick('buttonClean');
 		})();
 
@@ -565,7 +585,8 @@
 			buttonClick('multiple');
 			buttonClick('buttonThree');
 			buttonClick('calculate');
-			toEqual(result, 15, 'Умножение');
+			testResult = getValue('result');
+			toEqual(testResult, 15, 'Умножение');
 			buttonClick('buttonClean');
 		})();
 
@@ -574,14 +595,16 @@
 			buttonClick('multiple');
 			buttonClick('buttonFive');
 			buttonClick('multiple');
-			toEqual(result, 25, 'Промежуточный результат при умножении');
+			testResult = getValue('result');
+			toEqual(testResult, 25, 'Промежуточный результат при умножении');
 			buttonClick('buttonClean');
 		})();
 
 		(() => {
 			buttonClick('buttonFive');
 			buttonClick('multiple');
-			toEqual(result, 5, 'Результат не меняется при первом выборе операции');
+			testResult = getValue('result');
+			toEqual(testResult, 5, 'Результат не меняется при первом выборе операции');
 			buttonClick('buttonClean');
 		})();
 
@@ -590,7 +613,8 @@
 			buttonClick('multiple');
 			buttonClick('buttonZero');
 			buttonClick('calculate');
-			toEqual(result, 0, 'Умножение на ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 0, 'Умножение на ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -600,7 +624,8 @@
 			buttonClick('multiple');
 			buttonClick('buttonFive');
 			buttonClick('calculate');
-			toEqual(result, 0, 'Ноль умножается на число');
+			testResult = getValue('result');
+			toEqual(testResult, 0, 'Ноль умножается на число');
 			buttonClick('buttonClean');
 		})();
 
@@ -609,7 +634,8 @@
 			buttonClick('multiple');
 			buttonClick('buttonFive');
 			buttonClick('minus');
-			toEqual(result, 0, 'Промежуточный результат после умножения на ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 0, 'Промежуточный результат после умножения на ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -617,8 +643,8 @@
 			buttonClick('buttonZero');
 			buttonClick('buttonFive');
 			buttonClick('buttonZero');
-			result = getValue('result');
-			toEqual(result, 50, 'Ввод двухзначного числа, если вначале был ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 50, 'Ввод двухзначного числа, если вначале был ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -629,8 +655,8 @@
 			buttonClick('plus');
 			buttonClick('buttonOne');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 51, 'Суммирование двухзначного числа, если вначале был ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 51, 'Суммирование двухзначного числа, если вначале был ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -639,8 +665,8 @@
 			buttonClick('divide');
 			buttonClick('buttonZero');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 'Нельзя делить на ноль', 'Нельзя делить на ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 'Нельзя делить на ноль', 'Нельзя делить на ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -649,8 +675,8 @@
 			buttonClick('divide');
 			buttonClick('buttonZero');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 'Нельзя делить на ноль', 'Нельзя делить ноль на ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 'Нельзя делить на ноль', 'Нельзя делить ноль на ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -659,8 +685,8 @@
 			buttonClick('divide');
 			buttonClick('buttonThree');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 0, 'Можно делить ноль');
+			testResult = getValue('result');
+			toEqual(testResult, 0, 'Можно делить ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -669,8 +695,8 @@
 			buttonClick('divide');
 			buttonClick('buttonTwo');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 3, 'Целочисленное деление');
+			testResult = getValue('result');
+			toEqual(testResult, 3, 'Целочисленное деление');
 			buttonClick('buttonClean');
 		})();
 
@@ -680,8 +706,8 @@
 			buttonClick('divide');
 			buttonClick('buttonFour');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 2.5, 'Деление с коротким остатком');
+			testResult = getValue('result');
+			toEqual(testResult, 2.5, 'Деление с коротким остатком');
 			buttonClick('buttonClean');
 		})();
 
@@ -694,8 +720,8 @@
 			buttonClick('buttonZero');
 			buttonClick('buttonZero');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 0.00005, 'Деление с длинным остатком');
+			testResult = getValue('result');
+			toEqual(testResult, 0.00005, 'Деление с длинным остатком');
 			buttonClick('buttonClean');
 		})();
 
@@ -714,8 +740,8 @@
 			buttonClick('buttonEight');
 			buttonClick('buttonNine');
 			buttonClick('buttonZero');
-			result = getValue('result');
-			toEqual(result, 'Нельзя делить на ноль', 'Деление на ноль блокирует клавиатуру');
+			testResult = getValue('result');
+			toEqual(testResult, 'Нельзя делить на ноль', 'Деление на ноль блокирует клавиатуру');
 			buttonClick('buttonClean');
 		})();
 
@@ -726,8 +752,8 @@
 			buttonClick('calculate');
 			buttonClick('buttonClean');
 			buttonClick('buttonOne');
-			result = getValue('result');
-			toEqual(result, 1, 'Кнопка Очистить разблокирует заблокированную клавиатуру');
+			testResult = getValue('result');
+			toEqual(testResult, 1, 'Кнопка Очистить разблокирует заблокированную клавиатуру');
 			buttonClick('buttonClean');
 		})();
 
@@ -737,16 +763,16 @@
 			buttonClick('plus');
 			buttonClick('buttonOne');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 1, 'Кнопка Очистить прерывает текущую операцию');
+			testResult = getValue('result');
+			toEqual(testResult, 1, 'Кнопка Очистить прерывает текущую операцию');
 			buttonClick('buttonClean');
 		})();
 
 
 		(() => {
 			buttonClick('buttonDot');
-			result = getValue('result');
-			toEqual(result, 0, 'Результат не может начинаться с точки');
+			testResult = getValue('result');
+			toEqual(testResult, 0, 'Результат не может начинаться с точки');
 			buttonClick('buttonClean');
 		})();
 
@@ -754,8 +780,8 @@
 			buttonClick('buttonZero');
 			buttonClick('buttonDot');
 			buttonClick('buttonDot');
-			result = getValue('result');
-			toEqual(result, '0.', 'Может быть только одна точка');
+			testResult = getValue('result');
+			toEqual(testResult, '0.', 'Может быть только одна точка');
 			buttonClick('buttonClean');
 		})();
 
@@ -766,8 +792,8 @@
 			buttonClick('plus');
 			buttonClick('buttonThree');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 4.2, 'Суммирование нецелого и целого числа');
+			testResult = getValue('result');
+			toEqual(testResult, 4.2, 'Суммирование нецелого и целого числа');
 			buttonClick('buttonClean');
 		})();
 
@@ -783,8 +809,8 @@
 			buttonClick('buttonDot');
 			buttonClick('buttonThree');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 4.5, 'Отсекание лишних точек');
+			testResult = getValue('result');
+			toEqual(testResult, 4.5, 'Отсекание лишних точек');
 			buttonClick('buttonClean');
 		})();
 
@@ -792,8 +818,8 @@
 			buttonClick('buttonOne');
 			buttonClick('buttonTwo');
 			buttonClick('square');
-			result = getValue('result');
-			toEqual(result, 144, 'Квадрат числа');
+			testResult = getValue('result');
+			toEqual(testResult, 144, 'Квадрат числа');
 			buttonClick('buttonClean');
 		})();
 
@@ -803,8 +829,8 @@
 			buttonClick('plus');
 			buttonClick('buttonTwo');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 11, 'Квадрат и другая операция');
+			testResult = getValue('result');
+			toEqual(testResult, 11, 'Квадрат и другая операция');
 			buttonClick('buttonClean');
 		})();
 
@@ -812,8 +838,8 @@
 			buttonClick('buttonTwo');
 			buttonClick('square');
 			buttonClick('square');
-			result = getValue('result');
-			toEqual(result, 16, 'Двойной квадрат');
+			testResult = getValue('result');
+			toEqual(testResult, 16, 'Двойной квадрат');
 			buttonClick('buttonClean');
 		})();
 
@@ -824,8 +850,8 @@
 			buttonClick('buttonNine');
 			buttonClick('calculate');
 			buttonClick('square');
-			result = getValue('result');
-			toEqual(result, 49, 'Квадрат из результата сложной операции');
+			testResult = getValue('result');
+			toEqual(testResult, 49, 'Квадрат из результата сложной операции');
 			buttonClick('buttonClean');
 		})();
 
@@ -835,8 +861,8 @@
 			buttonClick('plus');
 			buttonClick('buttonFour');
 			buttonClick('square');
-			result = getValue('result');
-			toEqual(result, 400, 'Квадрат посреди сложной операции');
+			testResult = getValue('result');
+			toEqual(testResult, 400, 'Квадрат посреди сложной операции');
 			buttonClick('buttonClean');
 		})();
 
@@ -845,8 +871,8 @@
 			buttonClick('buttonDot');
 			buttonClick('buttonOne');
 			buttonClick('square');
-			result = getValue('result');
-			toEqual(result, 4.41, 'Квадрат числа с точкой');
+			testResult = getValue('result');
+			toEqual(testResult, 4.41, 'Квадрат числа с точкой');
 			buttonClick('buttonClean');
 		})();
 
@@ -855,8 +881,8 @@
 			buttonClick('buttonFour');
 			buttonClick('buttonFour');
 			buttonClick('root');
-			result = getValue('result');
-			toEqual(result, 12, 'Корень числа');
+			testResult = getValue('result');
+			toEqual(testResult, 12, 'Корень числа');
 			buttonClick('buttonClean');
 		})();
 
@@ -866,8 +892,8 @@
 			buttonClick('plus');
 			buttonClick('buttonTwo');
 			buttonClick('calculate');
-			result = getValue('result');
-			toEqual(result, 5, 'Корень и другая операция');
+			testResult = getValue('result');
+			toEqual(testResult, 5, 'Корень и другая операция');
 			buttonClick('buttonClean');
 		})();
 
@@ -876,8 +902,8 @@
 			buttonClick('buttonOne');
 			buttonClick('root');
 			buttonClick('root');
-			result = getValue('result');
-			toEqual(result, 3, 'Двойной корень');
+			testResult = getValue('result');
+			toEqual(testResult, 3, 'Двойной корень');
 			buttonClick('buttonClean');
 		})();
 
@@ -890,8 +916,8 @@
 			buttonClick('buttonNine');
 			buttonClick('calculate');
 			buttonClick('root');
-			result = getValue('result');
-			toEqual(result, 4, 'Корень из результата сложной операции');
+			testResult = getValue('result');
+			toEqual(testResult, 4, 'Корень из результата сложной операции');
 			buttonClick('buttonClean');
 		})();
 
@@ -901,8 +927,8 @@
 			buttonClick('plus');
 			buttonClick('buttonSeven');
 			buttonClick('root');
-			result = getValue('result');
-			toEqual(result, 3, 'Корень посреди сложной операции');
+			testResult = getValue('result');
+			toEqual(testResult, 3, 'Корень посреди сложной операции');
 			buttonClick('buttonClean');
 		})();
 
@@ -912,8 +938,8 @@
 			buttonClick('buttonTwo');
 			buttonClick('buttonFive');
 			buttonClick('root');
-			result = getValue('result');
-			toEqual(result, 2.5, 'Корень числа с точкой');
+			testResult = getValue('result');
+			toEqual(testResult, 2.5, 'Корень числа с точкой');
 			buttonClick('buttonClean');
 		})();
 
@@ -921,8 +947,8 @@
 			buttonClick('buttonSix');
 			buttonClick('square');
 			buttonClick('root');
-			result = getValue('result');
-			toEqual(result, 6, 'Квадрат и корень');
+			testResult = getValue('result');
+			toEqual(testResult, 6, 'Квадрат и корень');
 			buttonClick('buttonClean');
 		})();
 
@@ -930,10 +956,27 @@
 			buttonClick('minus');
 			buttonClick('buttonSix');
 			buttonClick('root');
-			result = getValue('result');
-			toEqual(result, 'Нельзя брать корень из отрицательного числа', 'Невозможность корня из отрицательного числа');
+			testResult = getValue('result');
+			toEqual(testResult, 'Нельзя брать корень из отрицательного числа', 'Невозможность корня из отрицательного числа');
 			buttonClick('buttonClean');
 		})();
+
+		(() => {
+			buttonClick('buttonOne');
+			buttonClick('buttonZero');
+			buttonClick('buttonZero');
+			buttonClick('buttonZero');
+			buttonClick('plus');
+			buttonClick('buttonFive');
+			buttonClick('percent');
+			testtestResult = getValue('result');
+			toEqual(testtestResult, 50, 'Промежуточное значение процента при суммировании');
+			buttonClick('calculate');
+			testtestResult = getValue('result');
+			toEqual(testtestResult, 1050, 'Финальное значение суммирования при суммировании с процентом');
+			buttonClick('buttonClean');
+		})();
+
 
 		document.write('<b>' + '---------------------------------------------------------------------------------------------' + '<br>' + '</b>');
 		document.write('<b>' + 'Успешных тестов: ' + testSuccessCount + '<br>' + '</b>');
