@@ -65,7 +65,7 @@
             <button class="button" id='buttonThree' onclick='three()'>3</button>
 
             <button class="button buttonOperationsFirstLine" id='plus' onclick='plus()'>+</button>
-            <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>&sup2</button>
+            <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>&sup2;</button>
 
         </div>
         <div>
@@ -73,13 +73,13 @@
             <button class="button" id='buttonFive' onclick='five()'>5</button>
             <button class="button" id='buttonSix' onclick='six()'>6</button>
 
-            <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>-</button>
-            <button class="button buttonOperationsSecondLine" id='root' onclick='root()'>&#8730</button>
+            <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>&ndash;</button>
+            <button class="button buttonOperationsSecondLine" id='root' onclick='root()'>&#8730;</button>
         </div>
         <button class="button" id='buttonSeven' onclick='seven()'>7</button>
         <button class="button" id='buttonEight' onclick='eight()'>8</button>
         <button class="button" id='buttonNine' onclick='nine()'>9</button>
-        <button class="button buttonOperationsFirstLine" id='multiple' onclick='multiple()'>*</button>
+        <button class="button buttonOperationsFirstLine" id='multiple' onclick='multiple()'>&#215</button>
         <div>
             <button class="button" id='buttonZero' onclick='zero()'>0</button>
             <button class="button" id='buttonDot' onclick='dot()'>.</button>
@@ -257,7 +257,6 @@
 		currentOperation = 'root';
 		part = result;
 		calculate();
-
 	}
 
 	function calculate() {
