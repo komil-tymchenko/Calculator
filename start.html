@@ -65,7 +65,7 @@
             <button class="button" id='buttonThree' onclick='buttonDigit(3)'>3</button>
 
             <button class="button buttonOperationsFirstLine" id='plus' onclick='operation(id)'>+</button>
-            <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>&sup2;</button>
+            <button class="button buttonOperationsSecondLine" id='square' onclick='squareRoot(id)'>&sup2;</button>
 
         </div>
         <div>
@@ -74,7 +74,7 @@
             <button class="button" id='buttonSix' onclick='buttonDigit(6)'>6</button>
 
             <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>&ndash;</button>
-            <button class="button buttonOperationsSecondLine" id='root' onclick='root()'>&#8730;</button>
+            <button class="button buttonOperationsSecondLine" id='root' onclick='squareRoot(id)'>&#8730;</button>
         </div>
         <button class="button" id='buttonSeven' onclick='buttonDigit(7)'>7</button>
         <button class="button" id='buttonEight' onclick='buttonDigit(8)'>8</button>
@@ -163,20 +163,13 @@
 		currentOperation = 'minus';
 	}
 
-	function square() {
+	function squareRoot(operationValue) {
 		{
 			calculate();
-			currentOperation = 'square';
+			currentOperation = operationValue;
 			part = result;
 			calculate();
 		}
-	}
-
-	function root() {
-		calculate();
-		currentOperation = 'root';
-		part = result;
-		calculate();
 	}
 
 	function percent() {
