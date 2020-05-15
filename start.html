@@ -60,25 +60,25 @@
 
     <div class='calculator'>
         <div>
-            <button class="button" id='buttonOne' onclick='one()'>1</button>
-            <button class="button" id='buttonTwo' onclick='two()'>2</button>
-            <button class="button" id='buttonThree' onclick='three()'>3</button>
+            <button class="button" id='buttonOne' onclick='buttonDigit(1)'>1</button>
+            <button class="button" id='buttonTwo' onclick='buttonDigit(2)'>2</button>
+            <button class="button" id='buttonThree' onclick='buttonDigit(3)'>3</button>
 
             <button class="button buttonOperationsFirstLine" id='plus' onclick='plus()'>+</button>
             <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>&sup2;</button>
 
         </div>
         <div>
-            <button class="button" id='buttonFour' onclick='four()'>4</button>
-            <button class="button" id='buttonFive' onclick='five()'>5</button>
-            <button class="button" id='buttonSix' onclick='six()'>6</button>
+            <button class="button" id='buttonFour' onclick='buttonDigit(4)'>4</button>
+            <button class="button" id='buttonFive' onclick='buttonDigit(5)'>5</button>
+            <button class="button" id='buttonSix' onclick='buttonDigit(6)'>6</button>
 
             <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>&ndash;</button>
             <button class="button buttonOperationsSecondLine" id='root' onclick='root()'>&#8730;</button>
         </div>
-            <button class="button" id='buttonSeven' onclick='seven()'>7</button>
-            <button class="button" id='buttonEight' onclick='eight()'>8</button>
-            <button class="button" id='buttonNine' onclick='nine()'>9</button>
+            <button class="button" id='buttonSeven' onclick='buttonDigit(7)'>7</button>
+            <button class="button" id='buttonEight' onclick='buttonDigit(8)'>8</button>
+            <button class="button" id='buttonNine' onclick='buttonDigit(9)'>9</button>
 
             <button class="button buttonOperationsFirstLine" id='multiple' onclick='multiple()'>&#215</button>
             <button class="button buttonOperationsSecondLine" id='percent' onclick='percent()'>%</button>
@@ -109,77 +109,15 @@
 
 	document.getElementById('result').innerHTML = 0;
 
-	function one() {
+	function buttonDigit(digitValue) {
 		if (operationBlocker === 0) {
-			part = part + 1;
+			part = part + digitValue;
 			document.getElementById('result').innerHTML = part;
 			zeroChecker();
 		}
 	}
 
-	function two() {
-		if (operationBlocker === 0) {
-			part = part + 2;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
 
-	function three() {
-		if (operationBlocker === 0) {
-			part = part + 3;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
-
-	function four() {
-		if (operationBlocker === 0) {
-			part = part + 4;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
-
-	function five() {
-		if (operationBlocker === 0) {
-			part = part + 5;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
-
-	function six() {
-		if (operationBlocker === 0) {
-			part = part + 6;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
-
-	function seven() {
-		if (operationBlocker === 0) {
-			part = part + 7;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
-
-	function eight() {
-		if (operationBlocker === 0) {
-			part = part + 8;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
-
-	function nine() {
-		if (operationBlocker === 0) {
-			part = part + 9;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
 
 	function zero() {
 		if (part !== '0' && operationBlocker === 0) {
