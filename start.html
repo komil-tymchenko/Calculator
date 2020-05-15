@@ -64,7 +64,7 @@
             <button class="button" id='buttonTwo' onclick='buttonDigit(2)'>2</button>
             <button class="button" id='buttonThree' onclick='buttonDigit(3)'>3</button>
 
-            <button class="button buttonOperationsFirstLine" id='plus' onclick='plus()'>+</button>
+            <button class="button buttonOperationsFirstLine" id='plus' onclick='operation(id)'>+</button>
             <button class="button buttonOperationsSecondLine" id='square' onclick='square()'>&sup2;</button>
 
         </div>
@@ -80,14 +80,14 @@
         <button class="button" id='buttonEight' onclick='buttonDigit(8)'>8</button>
         <button class="button" id='buttonNine' onclick='buttonDigit(9)'>9</button>
 
-        <button class="button buttonOperationsFirstLine" id='multiple' onclick='multiple()'>&#215</button>
+        <button class="button buttonOperationsFirstLine" id='multiple' onclick='operation(id)'>&#215</button>
         <button class="button buttonOperationsSecondLine" id='percent' onclick='percent()'>%</button>
         <div>
             <button class="button" id='buttonZero' onclick='zero()'>0</button>
             <button class="button" id='buttonDot' onclick='dot()'>.</button>
             <button class="button" id='calculate' onclick='calculate()'>=</button>
 
-            <button class="button buttonOperationsFirstLine" id='divide' onclick='divide()'>/</button>
+            <button class="button buttonOperationsFirstLine" id='divide' onclick='operation(id)'>/</button>
         </div>
         <div>
             <button class="button buttonClean" id='buttonClean' onclick='clean()'>Очистить</button>
@@ -142,9 +142,9 @@
 		return resultDotCheckerResult;
 	}
 
-	function plus() {
+	function operation(operationValue) {
 		calculate();
-		currentOperation = 'plus';
+		currentOperation = operationValue;
 		if (part !== '') {
 			result = (result + parseFloat(part, 10));
 		}
@@ -161,24 +161,6 @@
 		}
 		part = '';
 		currentOperation = 'minus';
-	}
-
-	function multiple() {
-		calculate();
-		currentOperation = 'multiple';
-		if (part !== '') {
-			result = result + parseFloat(part, 10)
-		}
-		part = '';
-	}
-
-	function divide() {
-		calculate();
-		currentOperation = 'divide';
-		if (part !== '') {
-			result = result + parseFloat(part, 10)
-		}
-		part = '';
 	}
 
 	function square() {
