@@ -146,7 +146,7 @@
 		calculate();
 		currentOperation = operationValue;
 		if (part !== '') {
-			result = (result + parseFloat(part, 10));
+			result = (result + parseFloat(part));
 		}
 		part = '';
 	}
@@ -154,10 +154,10 @@
 	function minus() {
 		calculate();
 		if (part !== '' && currentOperation === undefined) {
-			result = parseFloat(part, 10)
+			result = parseFloat(part)
 		}
 		if (part !== '' && currentOperation !== undefined) {
-			result = result - parseFloat(part, 10)
+			result = result - parseFloat(part)
 		}
 		part = '';
 		currentOperation = 'minus';
@@ -196,37 +196,19 @@
 				if (currentOperation !== undefined)
 				{
 					switch (currentOperation) {
-						case 'plus':
-							result = result + parseFloat(part, 10);
-							part = '';
-							break;
-
-						case 'minus':
-							result = result - parseFloat(part, 10);
-							part = '';
-							break;
-
-						case 'multiple':
-							result = result * parseFloat(part, 10);
-							part = '';
-							break;
-
+						case 'plus': result = result + parseFloat(part); break;
+						case 'minus': result = result - parseFloat(part); break;
+						case 'multiple': result = result * parseFloat(part); break;
+						case 'square': result = document.getElementById('result').innerHTML * document.getElementById('result').innerHTML; break;
 						case 'divide':
 							if (part !== '0') {
-								result = result / parseFloat(part, 10);
-								part = '';
+								result = result / parseFloat(part);
 								break;
 							} else {
 								result = 'Нельзя делить на ноль';
-								part = '';
 								operationBlocker = '1';
 								break;
 							}
-
-						case 'square':
-							result = document.getElementById('result').innerHTML * document.getElementById('result').innerHTML;
-							part = '';
-							break;
 
 						case 'root':
 							if (document.getElementById('result').innerHTML >= 0) {
@@ -234,10 +216,10 @@
 								part = '';
 							} else {
 								result = 'Нельзя брать корень из отрицательного числа';
-								part = '';
 								operationBlocker = '1';
 							}
 					}
+					part = '';
 					document.getElementById('result').innerHTML = result
 				}
 	}
@@ -398,7 +380,7 @@
 			buttonClick('buttonNine');
 
 
-			toEqual('9', 'Невозможность целых чисел, начинающихся на ноль');
+			toEqual(9, 'Невозможность целых чисел, начинающихся на ноль');
 			buttonClick('buttonClean');
 		})();
 
@@ -576,7 +558,7 @@
 			buttonClick('buttonZero');
 			buttonClick('calculate');
 
-			toEqual('Нельзя делить на ноль', 'Нельзя делить на ноль');
+			toEqual('Нельзя делить на ноль', 'Нельзя делить число на ноль');
 			buttonClick('buttonClean');
 		})();
 
