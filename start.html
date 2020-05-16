@@ -83,7 +83,7 @@
         <button class="button buttonOperationsFirstLine" id='multiple' onclick='operation(id)'>&#215</button>
         <button class="button buttonOperationsSecondLine" id='percent' onclick='percent()'>%</button>
         <div>
-            <button class="button" id='buttonZero' onclick='zero()'>0</button>
+            <button class="button" id='buttonZero' onclick='buttonDigit(0)'>0</button>
             <button class="button" id='buttonDot' onclick='dot()'>.</button>
             <button class="button" id='calculate' onclick='calculate()'>=</button>
 
@@ -111,24 +111,26 @@
 	function buttonDigit(digitValue) {
 		if (operationBlocker === 0) {
 			part = part + digitValue;
-			document.getElementById('result').innerHTML = part;
-			zeroChecker();
-		}
-	}
 
-	function zero() {
-		if (part !== '0' && operationBlocker === 0) {
-			part = part + 0;
-			document.getElementById('result').innerHTML = part
+			// Zero Checker
+			let array = part.split((''));
+			if (array.length === 2 && array[0] === "0") {
+				document.getElementById('result').innerHTML = array[1].toString();
+				part = array[1].toString();
+			}
+			else
+            {
+				document.getElementById('result').innerHTML = part;
+            }
 		}
 	}
 
 	function dot() {
 		if (part !== '')
-			if (resultDotChecker() < 1)
-				if (operationBlocker === 0) {
+			if (operationBlocker === 0)
+				if (resultDotChecker() < 1){
 					part = part + '.';
-					document.getElementById('result').innerHTML = part
+					document.getElementById('result').innerHTML = part;
 				}
 	}
 
@@ -191,7 +193,7 @@
 	}
 
 	function calculate() {
-		if (operationBlocker === 0)
+		 if (operationBlocker === 0)
 			if (part !== '')
 				if (currentOperation !== undefined)
 				{
@@ -231,16 +233,6 @@
 		currentOperation = undefined;
 		document.getElementById('result').innerHTML = result;
 	}
-
-	function zeroChecker() {
-		let array = (document.getElementById('result').innerText).split((''));
-
-		if (array.length === 2 && array[0] === "0") {
-			document.getElementById('result').innerHTML = array[1].toString();
-			part = array[1].toString();
-		}
-	}
-
 
 	/////////////////////  CORE  /////////////////////////
 	function buttonClick(buttonElementID) {
