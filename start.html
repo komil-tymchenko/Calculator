@@ -146,7 +146,7 @@
 	function operation(operationValue) {
 		calculate();
 		if (part !== '') {
-			result = (result + parseFloat(part));
+			result = parseFloat(part);
 		}
 		part = '';
 		currentOperation = operationValue;
