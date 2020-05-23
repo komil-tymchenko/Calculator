@@ -73,7 +73,7 @@
             <button class="button" id='buttonFive' onclick='buttonDigit(5)'>5</button>
             <button class="button" id='buttonSix' onclick='buttonDigit(6)'>6</button>
 
-            <button class="button buttonOperationsFirstLine" id='minus' onclick='minus()'>&ndash;</button>
+            <button class="button buttonOperationsFirstLine" id='minus' onclick='operation(id)'>&ndash;</button>
             <button class="button buttonOperationsSecondLine" id='root' onclick='squareRoot(id)'>&#8730;</button>
         </div>
         <button class="button" id='buttonSeven' onclick='buttonDigit(7)'>7</button>
@@ -125,8 +125,8 @@
 	}
 
 	function dot() {
-		if (part !== '')
-			if (operationBlocker === 0)
+		if (operationBlocker === 0)
+			if (part !== '')
 				if (resultDotChecker() < 1){
 					part = part + '.';
 					document.getElementById('result').innerHTML = part;
@@ -145,23 +145,11 @@
 
 	function operation(operationValue) {
 		calculate();
-		currentOperation = operationValue;
 		if (part !== '') {
 			result = (result + parseFloat(part));
 		}
 		part = '';
-	}
-
-	function minus() {
-		calculate();
-		if (part !== '' && currentOperation === undefined) {
-			result = parseFloat(part)
-		}
-		if (part !== '' && currentOperation !== undefined) {
-			result = result - parseFloat(part)
-		}
-		part = '';
-		currentOperation = 'minus';
+		currentOperation = operationValue;
 	}
 
 	function squareRoot(operationValue) {
@@ -214,7 +202,6 @@
 						case 'root':
 							if (document.getElementById('result').innerHTML >= 0) {
 								result = document.getElementById('result').innerHTML = Math.sqrt(document.getElementById('result').innerHTML);
-								part = '';
 							} else {
 								result = 'Нельзя брать корень из отрицательного числа';
 								operationBlocker = '1';
