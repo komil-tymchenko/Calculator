@@ -172,7 +172,7 @@
 
 				case 'multiple':
 				case 'divide':
-					part = (part / 100);
+					part = part / 100;
 					document.getElementById('result').innerHTML = part;
 					break;
 			}
@@ -186,12 +186,12 @@
 				{
 					switch (currentOperation) {
 						case 'plus': result = result + parseFloat(part); break;
-						case 'minus': result = result - parseFloat(part); break;
-						case 'multiple': result = result * parseFloat(part); break;
+						case 'minus': result = result - part; break;
+						case 'multiple': result = result * part; break;
 						case 'square': result = document.getElementById('result').innerHTML * document.getElementById('result').innerHTML; break;
 						case 'divide':
 							if (part !== '0') {
-								result = result / parseFloat(part);
+								result = result / part;
 								break;
 							} else {
 								result = 'Нельзя делить на ноль';
