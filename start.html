@@ -118,9 +118,9 @@
 				part = array[1].toString();
 			}
 			else
-            {
+			{
 				document.getElementById('result').innerHTML = part;
-            }
+			}
 		}
 	}
 
@@ -180,7 +180,7 @@
 	}
 
 	function calculate() {
-		 if (operationBlocker === 0)
+		if (operationBlocker === 0)
 			if (part !== '')
 				if (currentOperation !== undefined)
 				{
@@ -194,8 +194,7 @@
 								result = result / part;
 								break;
 							} else {
-								result = 'Нельзя делить на ноль';
-								operationBlocker = '1';
+								blockKeys('Нельзя делить на ноль');
 								break;
 							}
 
@@ -203,13 +202,17 @@
 							if (document.getElementById('result').innerHTML >= 0) {
 								result = document.getElementById('result').innerHTML = Math.sqrt(document.getElementById('result').innerHTML);
 							} else {
-								result = 'Нельзя брать корень из отрицательного числа';
-								operationBlocker = '1';
+								blockKeys('Нельзя брать корень из отрицательного числа');
 							}
 					}
 					part = '';
 					document.getElementById('result').innerHTML = result
 				}
+	}
+
+	function blockKeys(e) {
+		operationBlocker = '1';
+		result = e;
 	}
 
 	function clean() {
