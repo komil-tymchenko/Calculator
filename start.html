@@ -90,7 +90,7 @@
             <button class="button buttonOperationsFirstLine" id='divide' onclick='operation(id)'>/</button>
         </div>
         <div>
-            <button class="button buttonClean" id='buttonClean' onclick='clean()'>Очистить</button>
+            <button class="buttonClean" id='buttonClean' onclick='clean()'>Очистить</button>
         </div>
     </div>
 </div>
@@ -212,6 +212,7 @@
 
 	function blockKeys(e) {
 		operationBlocker = '1';
+		readOnlyButtons(true);
 		result = e;
 	}
 
@@ -221,7 +222,17 @@
 		operationBlocker = 0;
 		currentOperation = undefined;
 		document.getElementById('result').innerHTML = result;
+		readOnlyButtons(false);
 	}
+
+	function readOnlyButtons(blockValue)
+    {
+		let arr = document.getElementsByClassName('button');
+		for (let i = 0; i < arr.length; i++)
+		{
+			arr[i].disabled = blockValue;
+		}
+    }
 
 	/////////////////////  CORE  /////////////////////////
 	document.write('<br>' + '<b>' + ' Результаты тестов' + '<br>' + '</b>' + '<br>');
