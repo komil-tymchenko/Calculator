@@ -234,8 +234,15 @@
 		}
     }
 
-	let temp = document.getElementById('buttonOne');
-	temp.addEventListener("click",()=>{console.log('Нажата кнопка 1')});
+	function events()
+	{
+		let arr = document.getElementsByClassName('button');
+		for (let i = 0; i < arr.length; i++)
+		{
+			arr[i].addEventListener("click",()=>{console.log(new Date().toLocaleString() + ' Нажата кнопка ' + arr[i].id)});
+		}
+	}
+	events();
 
 	/////////////////////  CORE  /////////////////////////
 	document.write('<br>' + '<b>' + ' Результаты тестов' + '<br>' + '</b>' + '<br>');
