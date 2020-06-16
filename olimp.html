@@ -66,40 +66,52 @@
     <td id="c24" rowspan="2">24</td></tr><tr>
     <td id="c16" rowspan="1">16</td></tr></table>
 
-
-
 <script>
-document.getElementById("c1").innerHTML="test 1";
-document.getElementById("c2").innerHTML="test 2";
-document.getElementById("c3").innerHTML="test 3";
-document.getElementById('result').innerHTML = ((' '));
+	document.getElementById("c1").innerHTML="picture";
+	document.getElementById("c2").innerHTML="picture";
+	document.getElementById("c3").innerHTML="picture";
+	document.getElementById("c4").innerHTML="picture";
+	document.getElementById("c5").innerHTML="picture";
+	document.getElementById("c6").innerHTML="picture";
+	document.getElementById("c7").innerHTML="picture";
+	document.getElementById("c8").innerHTML="picture";
+	document.getElementById("c9").innerHTML="picture";
+	document.getElementById("c10").innerHTML="picture";
+	document.getElementById("c11").innerHTML="picture";
+	document.getElementById("c12").innerHTML="picture";
+	document.getElementById("c13").innerHTML="picture";
+	document.getElementById("c14").innerHTML="picture";
+	document.getElementById("c15").innerHTML="picture";
+	document.getElementById("c16").innerHTML="picture";
+
+	document.getElementById('result').innerHTML = ((' '));
 
 
-let answers = ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон', 'египет'];
+	let answers = ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон', 'египет'];
 
-function checkAnswer()
+	function checkAnswer()
 
-{
-	let forCheck = document.getElementById('answer').value;
-	for (let i = 0; i < answers.length; i++)
 	{
-		if (answers[i].toLowerCase() === forCheck.toLowerCase())
-            {
-                document.getElementById('c' + (i+1)).innerHTML=answers[i];
+		let forCheck = document.getElementById('answer').value;
+		for (let i = 0; i < answers.length; i++)
+		{
+			if (answers[i].toLowerCase() === forCheck.toLowerCase())
+			{
+				document.getElementById('c' + (i+1)).innerHTML=answers[i];
 				document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
-            }
-		else
-        {
-			document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
-        }
-		document.getElementById('answer').value = '';
+			}
+			else
+			{
+				document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
+			}
+			document.getElementById('answer').value = '';
+		}
 	}
-}
 
-document.addEventListener("keydown", (event)=>{
-	if (event.key === 'Enter')
-    {checkAnswer()}
-})
+	document.addEventListener("keydown", (event)=>{
+		if (event.key === 'Enter')
+		{checkAnswer()}
+	})
 
 
 </script>
