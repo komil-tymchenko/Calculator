@@ -21,13 +21,11 @@
 
 <div class='calculatorAndResult'>
     <p><b>Олимпийка</b></p>
-    <div class='result'>
-        <p style='color:blue' id='result'></p>
-    </div>
     <div class='calculator'>
         <div>
             <input class="button" type="text" id="answer" >
             <button class="button" id='check' onclick='checkAnswer()'>Проверить</button>
+            <p id='result'></p>
         </div>
     </div>
 </div>
@@ -74,7 +72,7 @@
 document.getElementById("c1").innerHTML="test 1";
 document.getElementById("c2").innerHTML="test 2";
 document.getElementById("c3").innerHTML="test 3";
-
+document.getElementById('result').innerHTML = ((' '));
 
 
 let answers = ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон', 'египет'];
@@ -88,8 +86,12 @@ function checkAnswer()
 		if (answers[i].toLowerCase() === forCheck.toLowerCase())
             {
                 document.getElementById('c' + (i+1)).innerHTML=answers[i];
-				document.getElementById('result').value = (('Ответ верный!').fontcolor('green'));
+				document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
             }
+		else
+        {
+			document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
+        }
 		document.getElementById('answer').value = '';
 	}
 }
