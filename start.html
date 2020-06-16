@@ -239,7 +239,7 @@
 		let arr = document.getElementsByClassName('button');
 		for (let i = 0; i < arr.length; i++)
 		{
-			arr[i].addEventListener("click",()=>{console.log(new Date().toLocaleString() + ' Нажата кнопка ' + arr[i].id)});
+			arr[i].addEventListener("click",()=>{console.log(new Date().toLocaleString('ru-RU') + ' Нажата кнопка ' + arr[i].id.replace(/button/g, '').toLocaleUpperCase() + ' результат на экране = ' + document.getElementById('result').innerText)});
 		}
 	}
 	events();
