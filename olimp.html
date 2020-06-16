@@ -1,0 +1,103 @@
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <title>Олимпийка</title>
+    <style>
+        .calculator {
+            padding: 5px;
+            float: left;
+            width: 2000px;
+        }
+
+        .button {
+            font-size: 16px;
+            width: 300px;
+            margin: 3px 1px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class='calculatorAndResult'>
+    <p><b>Олимпийка</b></p>
+    <div class='result'>
+        <p style='color:blue' id='result'></p>
+    </div>
+    <div class='calculator'>
+        <div>
+            <input class="button" type="text" id="answer" >
+            <button class="button" id='check' onclick='checkAnswer()'>Проверить</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<table border="1">
+    <tr><td id="c1" rowspan="1">1</td>
+        <td id="c17" rowspan="2">17</td>
+        <td id="c25" rowspan="4">25</td>
+        <td id="c29" rowspan="8">29</td>
+        <td id="c31" rowspan="16">31</td>
+    </tr><tr>
+    <td id="c2" rowspan="1">2</td></tr><tr>
+    <td id="c3" rowspan="1">3</td>
+    <td id="c18" rowspan="2">18</td></tr><tr>
+    <td id="c4" rowspan="1">4</td></tr><tr>
+    <td id="c5" rowspan="1">5</td>
+    <td id="c19" rowspan="2">19</td>
+    <td id="c26" rowspan="4">26</td></tr><tr>
+    <td id="c6" rowspan="1">6</td></tr><tr>
+    <td id="c7" rowspan="1">7</td>
+    <td id="c20" rowspan="2">20</td></tr><tr>
+    <td id="c8" rowspan="1">8</td></tr><tr>
+    <td id="c9" rowspan="1">9</td>
+    <td id="c21" rowspan="2">21</td>
+    <td id="c27" rowspan="4">27</td>
+    <td id="c30" rowspan="8">30</td></tr><tr>
+    <td id="c10" rowspan="1">10</td></tr><tr>
+    <td id="c11" rowspan="1">11</td>
+    <td id="c22" rowspan="2">22</td></tr><tr>
+    <td id="c12" rowspan="1">12</td></tr><tr>
+    <td id="c13" rowspan="1">13</td>
+    <td id="c23" rowspan="2">23</td>
+    <td id="c28" rowspan="4">28</td></tr><tr>
+    <td id="c14" rowspan="1">14</td></tr><tr>
+    <td id="c15" rowspan="1">15</td>
+    <td id="c24" rowspan="2">24</td></tr><tr>
+    <td id="c16" rowspan="1">16</td></tr></table>
+
+
+
+<script>
+document.getElementById("c1").innerHTML="test 1";
+document.getElementById("c2").innerHTML="test 2";
+document.getElementById("c3").innerHTML="test 3";
+
+
+
+let answers = ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон', 'египет'];
+
+function checkAnswer()
+
+{
+	let forCheck = document.getElementById('answer').value;
+	for (let i = 0; i < answers.length; i++)
+	{
+		if (answers[i].toLowerCase() === forCheck.toLowerCase())
+            {
+                document.getElementById('c' + (i+1)).innerHTML=answers[i];
+				document.getElementById('result').value = (('Ответ верный!').fontcolor('green'));
+            }
+		document.getElementById('answer').value = '';
+	}
+}
+
+document.addEventListener("keydown", (event)=>{
+	if (event.key === 'Enter')
+    {checkAnswer()}
+})
+
+
+</script>
