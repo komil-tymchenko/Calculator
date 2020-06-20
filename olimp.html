@@ -33,38 +33,38 @@
 
 
 <table border="1">
-    <tr><td id="c1" rowspan="1">1</td>
-        <td id="c17" rowspan="2">17</td>
-        <td id="c25" rowspan="4">25</td>
-        <td id="c29" rowspan="8">29</td>
-        <td id="c31" rowspan="16">31</td>
+    <tr><td class="cell" id="c1" rowspan="1">1</td>
+        <td class="cell"  id="c17" rowspan="2">17</td>
+        <td class="cell" id="c25" rowspan="4">25</td>
+        <td class="cell" id="c29" rowspan="8">29</td>
+        <td class="answer" id="c31" rowspan="16">31</td>
     </tr><tr>
-    <td id="c2" rowspan="1">2</td></tr><tr>
-    <td id="c3" rowspan="1">3</td>
-    <td id="c18" rowspan="2">18</td></tr><tr>
-    <td id="c4" rowspan="1">4</td></tr><tr>
-    <td id="c5" rowspan="1">5</td>
-    <td id="c19" rowspan="2">19</td>
-    <td id="c26" rowspan="4">26</td></tr><tr>
-    <td id="c6" rowspan="1">6</td></tr><tr>
-    <td id="c7" rowspan="1">7</td>
-    <td id="c20" rowspan="2">20</td></tr><tr>
-    <td id="c8" rowspan="1">8</td></tr><tr>
-    <td id="c9" rowspan="1">9</td>
-    <td id="c21" rowspan="2">21</td>
-    <td id="c27" rowspan="4">27</td>
-    <td id="c30" rowspan="8">30</td></tr><tr>
-    <td id="c10" rowspan="1">10</td></tr><tr>
-    <td id="c11" rowspan="1">11</td>
-    <td id="c22" rowspan="2">22</td></tr><tr>
-    <td id="c12" rowspan="1">12</td></tr><tr>
-    <td id="c13" rowspan="1">13</td>
-    <td id="c23" rowspan="2">23</td>
-    <td id="c28" rowspan="4">28</td></tr><tr>
-    <td id="c14" rowspan="1">14</td></tr><tr>
-    <td id="c15" rowspan="1">15</td>
-    <td id="c24" rowspan="2">24</td></tr><tr>
-    <td id="c16" rowspan="1">16</td></tr></table>
+    <td class="cell" id="c2" rowspan="1">2</td></tr><tr>
+    <td class="cell" id="c3" rowspan="1">3</td>
+    <td class="cell" id="c18" rowspan="2">18</td></tr><tr>
+    <td class="cell" id="c4" rowspan="1">4</td></tr><tr>
+    <td class="cell" id="c5" rowspan="1">5</td>
+    <td class="cell" id="c19" rowspan="2">19</td>
+    <td class="cell" id="c26" rowspan="4">26</td></tr><tr>
+    <td class="cell" id="c6" rowspan="1">6</td></tr><tr>
+    <td class="cell" id="c7" rowspan="1">7</td>
+    <td class="cell" id="c20" rowspan="2">20</td></tr><tr>
+    <td class="cell" id="c8" rowspan="1">8</td></tr><tr>
+    <td class="cell" id="c9" rowspan="1">9</td>
+    <td class="cell" id="c21" rowspan="2">21</td>
+    <td class="cell" id="c27" rowspan="4">27</td>
+    <td class="cell" id="c30" rowspan="8">30</td></tr><tr>
+    <td class="cell" id="c10" rowspan="1">10</td></tr><tr>
+    <td class="cell" id="c11" rowspan="1">11</td>
+    <td class="cell" id="c22" rowspan="2">22</td></tr><tr>
+    <td class="cell" id="c12" rowspan="1">12</td></tr><tr>
+    <td class="cell" id="c13" rowspan="1">13</td>
+    <td class="cell" id="c23" rowspan="2">23</td>
+    <td class="cell" id="c28" rowspan="4">28</td></tr><tr>
+    <td class="cell" id="c14" rowspan="1">14</td></tr><tr>
+    <td class="cell" id="c15" rowspan="1">15</td>
+    <td class="cell" id="c24" rowspan="2">24</td></tr><tr>
+    <td class="cell" id="c16" rowspan="1">16</td></tr></table>
 
 <script>
 	document.getElementById("c1").innerHTML="picture";
@@ -87,8 +87,7 @@
 	document.getElementById('result').innerHTML = ((' '));
 
     let quantity;
-	let answers = ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон', 'египет'];
-
+	let answers = ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон'];
 	function checkAnswer()
         {
         	let answer = document.getElementById('answer').value;
@@ -101,29 +100,84 @@
                         {
                             document.getElementById('c' + (i+1)).innerHTML=answers[i];
                             document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
+							document.getElementById('answer').value = '';
                             return;
                         }
                         else
                         {
                             document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
+							document.getElementById('answer').value = '';
                         }
                     }
                 }
-			if (answer === 'египет')
-				if (document.getElementById("c29").innerHTML === 'пустыня')
-					if (document.getElementById("c30").innerHTML === 'фараон')
-                        {
-                            document.getElementById('c31').innerHTML = answer;
+			if (answer.toLowerCase() === 'египет') {
+				let arr = document.getElementsByClassName('cell');
+				let newArr = [];
+				let etalonArr = answers.slice().sort();
+				for (let i = 0; i < arr.length; i++)
+                    {
+                        newArr.push(arr[i].innerHTML);
+                    }
+				if (JSON.stringify(etalonArr) === JSON.stringify(newArr.slice().sort()))
+                {
+							document.getElementById('c31').innerHTML = answer;
 							document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
-                        }
-
+						}
+				else
+                {
+					document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
+                }
+			}
 			document.getElementById('answer').value = '';
 			quantity++
             }
 	    document.addEventListener("keydown", (event)=>{
 		if (event.key === 'Enter')
 		{checkAnswer()}
-	})
+	});
 
+	/////////////////////  CORE  /////////////////////////
+	document.write('<br>' + '<b>' + ' Результаты тестов' + '<br>' + '</b>' + '<br>');
+
+	function clickCheck() {
+		document.getElementById('check').click()
+	}
+
+	function setValue(value) {
+		document.getElementById('answer').value = value;
+		clickCheck()
+	}
+
+	setValue('тростник');
+	setValue('чай');
+	setValue('лежак');
+	setValue('полотенце');
+	setValue('звезда');
+	setValue('космос');
+	setValue('граната');
+	setValue('астероид');
+	setValue('утро');
+	setValue('лампа');
+	setValue('трасса');
+	setValue('серпантин');
+	setValue('отдых');
+	setValue('подушка');
+	setValue('звук');
+	setValue('высота');
+	setValue('сахар');
+	setValue('пляж');
+	setValue('вселенная');
+	setValue('кольцо');
+	setValue('свет');
+	setValue('дорога');
+	setValue('сон');
+	setValue('тон');
+	setValue('бесконечность');
+	setValue('фара');
+	setValue('он');
+	setValue('пустыня');
+	setValue('фараон');
+	setValue('');
 
 </script>
+
