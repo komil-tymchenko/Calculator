@@ -86,64 +86,85 @@
 
 	document.getElementById('result').innerHTML = ((' '));
 
-    let quantity = 0;
-	let answers = ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон'];
+	let quantity = 0;
+	let answers =       ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон'];
+	let alterAnswers =  ['тростник', 'чай', 'шезлонг', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон'];
 	function checkAnswer()
-        {
-        	let answer = document.getElementById('answer').value;
-            if (answer !== '')
-				if (answer !== 'египет')
-					quantity++;
-                    {
-                    for (let i = 0; i < answers.length; i++)
-                    {
-                        if (answers[i].toLowerCase() === answer.toLowerCase())
-                        {
-                            document.getElementById('c' + (i+1)).innerHTML=answers[i];
-                            document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
-							document.getElementById('answer').value = '';
-                            return;
-                        }
-                        else
-                        {
-                            document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
-							document.getElementById('answer').value = '';
-                        }
-                    }
-                }
-			if (answer.toLowerCase() === 'египет') {
-				let arr = document.getElementsByClassName('cell');
-				let newArr = [];
-				let etalonArr = answers.slice().sort();
-				for (let i = 0; i < arr.length; i++)
-                    {
-                        newArr.push(arr[i].innerHTML);
-                    }
-				if (JSON.stringify(etalonArr) === JSON.stringify(newArr.slice().sort()))
-                {
-							document.getElementById('c31').innerHTML = answer;
-							document.getElementById('result').innerHTML = (
-								'<b>' +
-                                'Дата: ' + '</b>' +  'Октябрь' + '<br>' + '<b>' +
-                                'Отель: ' + '</b>'  + 'Dream Vacation'  + '<br>' + '<b>' +
-								'Тип : ' + '</b>'  + 'Все включено' + '<br>' + '<b>' +
-                                'Количетсво ночей:  ' + '</b>'  + '8' + '<br>' + '<b>' +
-								'Экскурсии: '  + '</b>'  + 'Луксор и Пирамиды'  ).fontcolor('blue') + '<br>' +
-								'Количество попыток ввода ответа: ' + quantity + '<br>' +
-                                '<img src="ans.JPG">'
-
-						}
-				else
-                {
-					document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
-                }
+	{
+		let answer = document.getElementById('answer').value;
+		if (answer !== '')
+			if (answer !== 'египет')
+				quantity++;
+		{
+			for (let i = 0; i < answers.length; i++)
+			{
+				if (answers[i].toLowerCase() === answer.toLowerCase())
+				{
+					document.getElementById('c' + (i+1)).innerHTML=answers[i];
+					correctAnswer();
+					return;
+				}
 			}
-			document.getElementById('answer').value = '';
-            }
-	    document.addEventListener("keydown", (event)=>{
+
+			for (let i = 0; i < alterAnswers.length; i++)
+			{
+				if (alterAnswers[i].toLowerCase() === answer.toLowerCase())
+				{
+					document.getElementById('c' + (i+1)).innerHTML=answers[i];
+					correctAnswer();
+					return;
+				}
+				else
+				{
+					badAnswer()
+				}
+			}
+		}
+		if (answer.toLowerCase() === 'египет') {
+			let arr = document.getElementsByClassName('cell');
+			let newArr = [];
+			let etalonArr = answers.slice().sort();
+			for (let i = 0; i < arr.length; i++)
+			{
+				newArr.push(arr[i].innerHTML);
+			}
+			if (JSON.stringify(etalonArr) === JSON.stringify(newArr.slice().sort()))
+			{
+				document.getElementById('c31').innerHTML = answer;
+				document.getElementById('result').innerHTML = (
+					'<b>' +
+					'Дата: ' + '</b>' +  'Октябрь' + '<br>' + '<b>' +
+					'Отель: ' + '</b>'  + 'Dream Vacation'  + '<br>' + '<b>' +
+					'Тип : ' + '</b>'  + 'Все включено' + '<br>' + '<b>' +
+					'Количетсво ночей:  ' + '</b>'  + '8' + '<br>' + '<b>' +
+					'Экскурсии: '  + '</b>'  + 'Луксор и Пирамиды'  ).fontcolor('blue') + '<br>' +
+					'Количество попыток ввода ответа: ' + quantity + '<br>' +
+					'<img src="ans.JPG">'
+
+			}
+			else
+			{
+				document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
+			}
+		}
+		document.getElementById('answer').value = '';
+	}
+	document.addEventListener("keydown", (event)=>{
 		if (event.key === 'Enter')
 		{checkAnswer()}
 	});
+
+	function correctAnswer()
+    {
+		document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
+		document.getElementById('answer').value = '';
+    }
+
+	function badAnswer()
+	{
+		document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
+		document.getElementById('answer').value = '';
+	}
 
 	/////////////////////  CORE  /////////////////////////
 	function clickCheck() {
@@ -185,7 +206,6 @@
 	setValue('пустыня');
 	setValue('фараон');
 	setValue('песок');
-	setValue('египет');
-
+	setValue('Египет');
 </script>
 
