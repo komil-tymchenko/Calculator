@@ -67,22 +67,22 @@
     <td class="cell" id="c16" rowspan="1">16</td></tr></table>
 
 <script>
-	document.getElementById("c1").innerHTML="picture";
-	document.getElementById("c2").innerHTML="picture";
-	document.getElementById("c3").innerHTML="picture";
-	document.getElementById("c4").innerHTML="picture";
-	document.getElementById("c5").innerHTML="picture";
-	document.getElementById("c6").innerHTML="picture";
-	document.getElementById("c7").innerHTML="picture";
-	document.getElementById("c8").innerHTML="picture";
-	document.getElementById("c9").innerHTML="picture";
-	document.getElementById("c10").innerHTML="picture";
-	document.getElementById("c11").innerHTML="picture";
-	document.getElementById("c12").innerHTML="picture";
-	document.getElementById("c13").innerHTML="picture";
-	document.getElementById("c14").innerHTML="picture";
-	document.getElementById("c15").innerHTML="picture";
-	document.getElementById("c16").innerHTML="picture";
+	document.getElementById("c1").innerHTML='<img src="1.png">';
+	document.getElementById("c2").innerHTML='<img src="2.png">';
+	document.getElementById("c3").innerHTML='<img src="3.png">';
+	document.getElementById("c4").innerHTML='<img src="4.png">';
+	document.getElementById("c5").innerHTML='<img src="5.png">';
+	document.getElementById("c6").innerHTML='<img src="6.png">';
+	document.getElementById("c7").innerHTML='<img src="7.png">';
+	document.getElementById("c8").innerHTML='<img src="8.png">';
+	document.getElementById("c9").innerHTML='<img src="9.png">';
+	document.getElementById("c10").innerHTML='<img src="10.png">';
+	document.getElementById("c11").innerHTML='<img src="11.png">';
+	document.getElementById("c12").innerHTML='<img src="12.png">';
+	document.getElementById("c13").innerHTML='<img src="13.png">';
+	document.getElementById("c14").innerHTML='<img src="14.png">';
+	document.getElementById("c15").innerHTML='<img src="15.png">';
+	document.getElementById("c16").innerHTML='<img src="16.png">';
 
 	document.getElementById('result').innerHTML = ((' '));
 
@@ -147,6 +147,50 @@
 				document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
 			}
 		}
+
+		if (answer.toLowerCase() === 'показать ответы')
+		{
+			function clickCheck() {
+				document.getElementById('check').click()
+			}
+
+			function setValue(value) {
+				document.getElementById('answer').value = value;
+				clickCheck()
+			}
+
+			setValue('тростник');
+			setValue('чай');
+			setValue('лежак');
+			setValue('полотенце');
+			setValue('звезда');
+			setValue('космос');
+			setValue('граната');
+			setValue('астероид');
+			setValue('утро');
+			setValue('лампа');
+			setValue('трасса');
+			setValue('серпантин');
+			setValue('отдых');
+			setValue('подушка');
+			setValue('звук');
+			setValue('высота');
+			setValue('сахар');
+			setValue('пляж');
+			setValue('вселенная');
+			setValue('кольцо');
+			setValue('свет');
+			setValue('дорога');
+			setValue('сон');
+			setValue('тон');
+			setValue('бесконечность');
+			setValue('фара');
+			setValue('он');
+			setValue('пустыня');
+			setValue('фараон');
+			setValue('песок');
+		}
+
 		document.getElementById('answer').value = '';
 	}
 	document.addEventListener("keydown", (event)=>{
@@ -155,57 +199,15 @@
 	});
 
 	function correctAnswer()
-    {
+	{
 		document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
 		document.getElementById('answer').value = '';
-    }
+	}
 
 	function badAnswer()
 	{
 		document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
 		document.getElementById('answer').value = '';
 	}
-
-	/////////////////////  CORE  /////////////////////////
-	function clickCheck() {
-		document.getElementById('check').click()
-	}
-
-	function setValue(value) {
-		document.getElementById('answer').value = value;
-		clickCheck()
-	}
-
-	setValue('тростник');
-	setValue('чай');
-	setValue('лежак');
-	setValue('полотенце');
-	setValue('звезда');
-	setValue('космос');
-	setValue('граната');
-	setValue('астероид');
-	setValue('утро');
-	setValue('лампа');
-	setValue('трасса');
-	setValue('серпантин');
-	setValue('отдых');
-	setValue('подушка');
-	setValue('звук');
-	setValue('высота');
-	setValue('сахар');
-	setValue('пляж');
-	setValue('вселенная');
-	setValue('кольцо');
-	setValue('свет');
-	setValue('дорога');
-	setValue('сон');
-	setValue('тон');
-	setValue('бесконечность');
-	setValue('фара');
-	setValue('он');
-	setValue('пустыня');
-	setValue('фараон');
-	setValue('песок');
-	setValue('Египет');
 </script>
 
