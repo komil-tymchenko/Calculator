@@ -1,5 +1,6 @@
 <html>
 <head>
+	<link rel="shortcut icon" href="favicon.png" type="image/png">
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
     <title>Олимпийка</title>
     <style>
@@ -23,7 +24,7 @@
     <p><b>  Олимпийка</b></p>
     <div class='calculator'>
         <div>
-            <input class="button" type="text" id="answer" >
+            <input class="button" type="text" id="olimpAnswer" >
             <button class="button" id='check' onclick='checkAnswer()'>Проверить</button>
             <p id='result'></p>
         </div>
@@ -88,10 +89,10 @@
 
 	let quantity = 0;
 	let answers =       ['тростник', 'чай', 'лежак', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон'];
-	let alterAnswers =  ['тростник', 'чай', 'шезлонг', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'вселенная', 'кольцо', 'свет', 'дорога', 'сон', 'тон', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон'];
+	let alterAnswers =  ['тростник', 'чай', 'шезлонг', 'полотенце', 'звезда', 'космос', 'граната', 'астероид', 'утро', 'лампа', 'трасса', 'серпантин', 'отдых', 'подушка', 'звук', 'высота', 'сахар', 'пляж', 'галактика', 'кольцо', 'светло', 'дорога', 'сон', 'тональность', 'песок', 'бесконечность', 'фара', 'он', 'пустыня', 'фараон'];
 	function checkAnswer()
 	{
-		let answer = document.getElementById('answer').value;
+		let answer = document.getElementById('olimpAnswer').value;
 		if (answer !== '')
 			if (answer !== 'египет')
 				quantity++;
@@ -144,7 +145,7 @@
 			}
 			else
 			{
-				document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
+				document.getElementById('result').innerHTML = ('Неправильно').fontcolor('orange');
 			}
 		}
 
@@ -155,7 +156,7 @@
 			}
 
 			function setValue(value) {
-				document.getElementById('answer').value = value;
+				document.getElementById('olimpAnswer').value = value;
 				clickCheck()
 			}
 
@@ -191,7 +192,7 @@
 			setValue('песок');
 		}
 
-		document.getElementById('answer').value = '';
+		document.getElementById('olimpAnswer').value = '';
 	}
 	document.addEventListener("keydown", (event)=>{
 		if (event.key === 'Enter')
@@ -201,13 +202,13 @@
 	function correctAnswer()
 	{
 		document.getElementById('result').innerHTML = ('Ответ верный!').fontcolor('green');
-		document.getElementById('answer').value = '';
+		document.getElementById('olimpAnswer').value = '';
 	}
 
 	function badAnswer()
 	{
 		document.getElementById('result').innerHTML = ('Непраильно').fontcolor('orange');
-		document.getElementById('answer').value = '';
+		document.getElementById('olimpAnswer').value = '';
 	}
 </script>
 
